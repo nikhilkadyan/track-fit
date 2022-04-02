@@ -1,11 +1,12 @@
 import Layout from '../Layout'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { loginUser } from '../API/auth'
 import { useState } from 'react'
 import Swal from 'sweetalert2'
 import './auth.scss'
 
 export default function Login() {
+    const navigate = useNavigate()
     const [loading, setLoading] = useState(false)
     const [user, setUser] = useState({
         email: '',
@@ -32,7 +33,8 @@ export default function Login() {
         const result = await loginUser(user)
         setLoading(false)
         if (result.success) {
-            console.log('got it ', result)
+            localStorage.setItem('user', JSON.stringify(result));
+            navigate('/dashboard');
         } else {
             return Swal.fire({
                 title: 'Error!',
@@ -46,21 +48,21 @@ export default function Login() {
     return (
         <Layout>
             <div className='auth-container'>
-                <h1 className={'title'}>
+                <h1 className='title'>
                     Welcome to <a href='https://nikhilkadyan.com'>Track Fit</a>
                 </h1>
-                <div className={'description'}>
+                <div className='description'>
                     Login to continue
                 </div>
-                <div className={'form'}>
+                <div className='form'>
                     <label>E-mail address</label>
-                    <input type={'email'} placeholder='nikhil@domain.com' name='email' onChange={e => updateField(e)} />
+                    <input type='email' placeholder='nikhil@domain.com' name='email' onChange={e => updateField(e)} />
                     <label>Your password</label>
                     <input type={'password'} placeholder='Test123456@@' name='password' onChange={e => updateField(e)} />
                 </div>
-                <div className={'actionContainer'}>
-                    <div className={'signupLink'}><Link to={'/signup'}>Create a new account ?</Link></div>
-                    <button className={'btn'} onClick={() => login()} disabled={loading}>
+                <div className='actionContainer'>
+                    <div className='signupLink'><Link to={'/signup'}>Create a new account ?</Link></div>
+                    <button className='btn' onClick={() => login()} disabled={loading}>
                         {loading ? 'Verifying...' : 'Proceed with login'}
                     </button>
                 </div>
