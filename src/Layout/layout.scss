@@ -1,0 +1,46 @@
+.layout-main {
+    min-height: calc(100vh - 80px);
+    padding: 4rem 10px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer {
+    height: 80px;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    flex: 1;
+    padding: 2rem 0;
+    background: white;
+    border-top: 1px solid #eaeaea;
+    justify-content: center;
+    align-items: center;
+
+    a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-grow: 1;
+    }
+
+    .logo {
+        height: 1em;
+        margin-left: 0.5rem;
+    }
+}
+
+
+@media screen and (max-width: 600px) {
+    .main {
+        min-height: 100vh;
+    }
+
+    .footer {
+        height: 70px;
+    }
+}
